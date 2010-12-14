@@ -486,12 +486,14 @@ document.iFixitGuideWidget.loaded = (function() {
    var base = "http://www.ifixit.com";
    var embeds = [];
 
+   var script_regex = /((ifixit|cominor|faranor|makeprojects)\.com\/Embed\/js)|(static\.ifixit\.net\/static\/embed\/(make|ifixit)-embed\.js)/i;
+
    var scripts = document.getElementsByTagName("script");
 
    for (var i in scripts) {
       // Look for the ifixit include...
       var script = scripts[i];
-      if (script.src && script.src.search(/((ifixit)|(cominor)|(faranor))\.com\/Embed\/js/i) > -1) {
+      if (script.src && script.src.search(script_regex) > -1) {
          var size = document.iFixitGuideWidget.get_param('size', script.src);
          var guideid = document.iFixitGuideWidget.get_param('id', script.src);
          if (!document.iFixitGuideWidget.contains(document.iFixitGuideWidget.embeds, guideid)) {
