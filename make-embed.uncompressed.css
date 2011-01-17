@@ -19,7 +19,7 @@
    font-size: 123.4%; 
 }
 
-.ifixit-guide  h3 {
+.ifixit-guide h3 {
    font-size: 108%;  
    line-height: 1em;
 }
@@ -42,6 +42,7 @@
    font-weight: bold; 
    padding: 0;
    color: black;
+   text-decoration: none;
 }
 
 .ifixit-guide img, .ifixit-guide img a {
@@ -170,6 +171,11 @@
    padding-left: 10px;
 }
 
+.ifixit-guide .ifixit-parts h3 {
+   margin: 0 !important;
+   border: none !important;
+}
+
 .ifixit-guide-large .ifixit-parts {
    width: 315px;
    height: 295px;
@@ -185,9 +191,10 @@
 
 .ifixit-guide .ifixit-stepTitle,
 .ifixit-guide .ifixit-stepTitle a {
-   margin: 0;
+   margin: 0 !important;
    color: black;
    line-height: 1.3em;
+   border: none !important;
 }
 
 .ifixit-guide .ifixit-stepText, .ifixit-guide #ifixit-summary {
@@ -253,9 +260,10 @@
 }
 
 .ifixit-guide-small #ifixit-summary {
-   height: 195px;
+   height: 160px;
    margin-top: 10px;
    width: 185px;
+   overflow: hidden;
 }
 
 .ifixit-guide-large #ifixit-summary {

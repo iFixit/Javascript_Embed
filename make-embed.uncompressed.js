@@ -61,15 +61,15 @@ if (!document.iFixitGuideWidget) {
          head.id = 'ifixit-header';
          elem.appendChild(head);
 
-         var h1 = document.createElement('h1');
-         h1.innerHTML = data['guide']['title'];
-         h1.id = 'ifixit-introHeader';
-         elem.appendChild(h1);
-
          var img = document.createElement('img');
          img.setAttribute('src', data['guide']['image']['text'] + '.standard');
          img.id = 'ifixit-stepIntroImage';
          elem.appendChild(img);
+
+         var h1 = document.createElement('h1');
+         h1.innerHTML = data['guide']['title'];
+         h1.id = 'ifixit-introHeader';
+         elem.appendChild(h1);
 
          var stepText = document.createElement('div');
          stepText.id = 'ifixit-summary';
@@ -90,7 +90,7 @@ if (!document.iFixitGuideWidget) {
             right.className = "ifixit-buttonLink";
          } else {
             ntext = document.createElement('div');
-            ntext.innerHTML = 'Begin'
+            ntext.innerHTML = 'Begin';
             ntext.id = 'ifixit-begin';
 
             right = document.createElement('div');
@@ -175,20 +175,20 @@ if (!document.iFixitGuideWidget) {
          }
 
          // The isNaN is because mootools does crazy shit w/ JSON.
-         for (var i = 0; i < step['images'].length && !isNaN(i); i++) {
-            if (i == 0) {
+         for (var imgid = 0; imgid < step['images'].length && !isNaN(imgid); imgid++) {
+            if (imgid == 0) {
                var mainImgA = document.createElement('a');
                mainImgA.href = 'http://makeprojects.com' + '/Guide/View/' + guideid + '/' + (stepid + 1);
                mainImgA.appendChild(mainImg);
                images.appendChild(mainImgA);
 
             // Because of funkiness in jQuery and mootools
-            } else if (i >= 3 || isNaN(i)) { 
+            } else if (imgid >= 3 || isNaN(imgid)) { 
                break;
             }
 
             var img = document.createElement('img');
-            img.setAttribute('src', step['images'][i]['text'] + '.' + thumbnailSize);
+            img.setAttribute('src', step['images'][imgid]['text'] + '.' + thumbnailSize);
             img.className = 'ifixit-stepThumb';
             img.onmouseover = function(e) {
                // NOTE: targ stuff for ie support.
@@ -486,7 +486,7 @@ document.iFixitGuideWidget.loaded = (function() {
    var base = "http://makeprojects.com";
    var embeds = [];
 
-   var script_regex = /((ifixit|cominor|faranor|makeprojects)\.com\/Embed\/js)|(static\.ifixit\.net\/static\/embed\/(make|ifixit)-embed\.js)/i;
+   var script_regex = /((ifixit|cominor|makeprojects)\.com\/Embed\/js)|((static\.ifixit\.net|cominor\.com)\/static\/embed\/\w+-embed(\.uncompressed)?\.js)/i;
 
    var scripts = document.getElementsByTagName("script");
 
@@ -524,6 +524,9 @@ document.iFixitGuideWidget.loaded = (function() {
          script.parentNode.appendChild(elem);
       }
 
+      if (!guideid)
+         return false;
+
       if (size == 'small')
          elem.className = 'ifixit-guide ifixit-guide-small';
       else if (size == 'large')
@@ -534,16 +537,17 @@ document.iFixitGuideWidget.loaded = (function() {
       js.src = base + "/api/0.1/guide/" + guideid + "?jsonp=document.iFixitGuideWidget.display";
 
       head.appendChild(js);
-   }
 
-   if (!document.iFixitGuideWidget.loaded) {
-      var link = document.createElement("link");
-      // link.setAttribute('href', base + "/Embed/css");
-      link.setAttribute('href', 'http://static.ifixit.net/static/embed/make-embed.css');
-      link.setAttribute('rel', "stylesheet");
-      link.setAttribute('type', "text/css");
-      link.setAttribute('media', "screen");
-      head.appendChild(link);
+      // Needs to be in this loop to be embedable via a js post page load. 
+      // Why? I don't know.
+      if (!document.iFixitGuideWidget.loaded) {
+         var link = document.createElement("link");
+         link.href = "http://static.ifixit.net/static/embed/make-embed.css";
+         link.rel = "stylesheet";
+         link.type = "text/css";
+         link.media = "screen";
+         head.appendChild(link);
+      }
    }
 
    return true;
