@@ -1,7 +1,7 @@
 /**
  * iFixit Javascript Guide Embed Widget
  * Copyright iFixit 2010
- * @version 0.42
+ * @version 0.425
  * @author Nat Welch (nat@ifixit.com)
  */
 
@@ -13,6 +13,12 @@
 .ifixit-guide h1 {
    font-size: 138.5%;  
    line-height: 1.2em;
+   text-decoration: none;
+}
+
+.ifixit-guide h1 a {
+   text-decoration: none;
+   color: black;
 }
 
 .ifixit-guide h2 {
@@ -28,6 +34,16 @@
 .ifixit-guide h2,
 .ifixit-guide h3 {
    margin: 1em 0;
+}
+
+.ifixit-guide h1,
+.ifixit-guide h2,
+.ifixit-guide h3,
+.ifixit-guide h4,
+.ifixit-guide h5,
+.ifixit-guide h6 {
+   display: block;
+   background: none;
 }
 
 .ifixit-guide h1,
@@ -138,7 +154,6 @@
    top: 39px;
 }
 
-
 .ifixit-guide-small #ifixit-tools ul {
    padding-left: 20px;
 }
@@ -172,6 +187,7 @@
 }
 
 .ifixit-guide .ifixit-parts h3 {
+   padding-top: 7px;
    margin: 0 !important;
    border: none !important;
 }
@@ -184,9 +200,16 @@
    padding-left: 10px;
 }
 
-.ifixit-guide #ifixit-introHeader {
+.ifixit-guide .ifixit-introHeader h1 {
    padding: 6px 0 0 7px; 
    margin: 0;
+   color: black;
+   text-decoration: none;
+}
+
+.ifixit-guide .ifixit-introHeader {
+   color: black;
+   text-decoration: none;
 }
 
 .ifixit-guide .ifixit-stepTitle,
@@ -195,6 +218,7 @@
    color: black;
    line-height: 1.3em;
    border: none !important;
+   text-decoration: underline;
 }
 
 .ifixit-guide .ifixit-stepText, .ifixit-guide #ifixit-summary {

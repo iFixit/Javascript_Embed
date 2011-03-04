@@ -1,7 +1,7 @@
 /**
  * iFixit Javascript Guide Embed Widget
- * Copyright iFixit 2010
- * @version 0.42
+ * Copyright iFixit 2011
+ * @version 0.425
  * @author Nat Welch (nat@ifixit.com)
  */
 if (!document.iFixitGuideWidget) {
@@ -68,8 +68,13 @@ if (!document.iFixitGuideWidget) {
 
          var h1 = document.createElement('h1');
          h1.innerHTML = data['guide']['title'];
-         h1.id = 'ifixit-introHeader';
-         elem.appendChild(h1);
+
+         var h1a = document.createElement('a');
+         h1a.href = data['url'];
+         h1a.className = 'ifixit-introHeader';
+
+         h1a.appendChild(h1);
+         elem.appendChild(h1a);
 
          var stepText = document.createElement('div');
          stepText.id = 'ifixit-summary';
@@ -126,10 +131,10 @@ if (!document.iFixitGuideWidget) {
 
          logo.id = 'ifixit-logo';
          var logoa = document.createElement('a');
-         logoa.href = 'http://www.ifixit.com' + data['url'];
+         logoa.href = data['url'];
+         logoa.title = "";
 
          logoa.appendChild(logo);
-         logoa.title = "view on iFixit";
 
          if (document.iFixitGuideWidget.options.large)
             foot.appendChild(logoa);
@@ -257,7 +262,7 @@ if (!document.iFixitGuideWidget) {
             stepTitle.innerHTML = 'Step ' + (stepid + 1) + '/' + data['guide']['steps'].length + ' &mdash; ';
          var guideLink = document.createElement('a');
          guideLink.innerHTML = data['guide']['title'];
-         guideLink.href = 'http://www.ifixit.com' + data['url'];
+         guideLink.href = data['url'];
          stepTitle.appendChild(guideLink);
          stepTitle.className = 'ifixit-stepTitle';
          stepText.appendChild(stepTitle);
@@ -362,8 +367,8 @@ if (!document.iFixitGuideWidget) {
             logo = document.createElement('div');
          logo.id = 'ifixit-logo';
          var logoa = document.createElement('a');
-         logoa.href = 'http://www.ifixit.com' + data['url'];
-         logoa.title = "view on iFixit";
+         logoa.href = data['url'];
+         logoa.title = "";
 
          var headerTxt = document.createElement('div');
          headerTxt.innerHTML = data['guide']['type'] == 'teardown' ? 'Teardown' : data['guide']['type'] + ' Guide';
@@ -514,6 +519,9 @@ document.iFixitGuideWidget.loaded = (function() {
       var script = embeds[j].script;
       var size = embeds[j].size;
 
+      if (!guideid)
+         return false;
+
       // Let users specify their own div.
       var elemid = 'ifixit-embed-' + guideid;
       var elem = document.getElementById(elemid);
@@ -524,9 +532,6 @@ document.iFixitGuideWidget.loaded = (function() {
          script.parentNode.appendChild(elem);
       }
 
-      if (!guideid)
-         return false;
-
       if (size == 'small')
          elem.className = 'ifixit-guide ifixit-guide-small';
       else if (size == 'large')
@@ -535,7 +540,7 @@ document.iFixitGuideWidget.loaded = (function() {
       var js = document.createElement('script');
       js.type = 'text/javascript';
       js.src = base + "/api/0.1/guide/" + guideid + "?jsonp=document.iFixitGuideWidget.display";
-
+      js.async = true;
       head.appendChild(js);
 
       // Needs to be in this loop to be embedable via a js post page load. 
