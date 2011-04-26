@@ -11,7 +11,7 @@
 }
 
 .ifixit-guide h1 {
-   font-size: 138.5%;  
+   font-size: 138.5%;
    line-height: 1.2em;
    text-decoration: none;
 }
@@ -22,11 +22,11 @@
 }
 
 .ifixit-guide h2 {
-   font-size: 123.4%; 
+   font-size: 123.4%;
 }
 
 .ifixit-guide h3 {
-   font-size: 108%;  
+   font-size: 108%;
    line-height: 1em;
 }
 
@@ -55,7 +55,7 @@
 .ifixit-guide strong {
    font-family: "Arial","Trebuchet MS","Bitstream Vera Sans",sans-serif;
    line-height: auto;
-   font-weight: bold; 
+   font-weight: bold;
    padding: 0;
    color: black;
    text-decoration: none;
@@ -70,7 +70,7 @@
 .ifixit-guide acronym {
    border-bottom: 1px dotted #000;
    cursor: help;
-} 
+}
 
 .ifixit-guide em {
    font-style: italic;
@@ -88,7 +88,7 @@
 }
 
 .ifixit-guide ol li {
-   list-style: decimal outside;  
+   list-style: decimal outside;
 }
 
 .ifixit-guide ul li {
@@ -111,7 +111,7 @@
    line-height: 1em;
 }
 /***** end base styling */
- 
+
 .ifixit-guide-small {
    border: 1px solid #9A9A9A;
    width: 490px;
@@ -129,8 +129,8 @@
 
 .ifixit-guide-large {
    border: 1px solid #9A9A9A;
-   width: 665px;
-   height: 340px;
+   width: 727px;
+   height: 434px;
    padding: 4px;
    font-size: 16px;
    font-family: "Arial","Trebuchet MS","Bitstream Vera Sans",sans-serif;
@@ -172,8 +172,8 @@
 
 .ifixit-guide-large #ifixit-tools {
    background-color: #EEE;
-   width: 652px;
-   height: 328px;
+   width: 717px;
+   height: 434px;
    margin: 5px;
    border: 1px solid #9A9A9A;
 }
@@ -201,7 +201,7 @@
 }
 
 .ifixit-guide .ifixit-introHeader h1 {
-   padding: 6px 0 0 7px; 
+   padding: 6px 0 0 7px;
    margin: 0;
    color: black;
    text-decoration: none;
@@ -342,7 +342,7 @@
    width: 306px;
 }
 
-.ifixit-guide-large #ifixit-stepImage, 
+.ifixit-guide-large #ifixit-stepImage,
 .ifixit-guide-large #ifixit-stepIntroImage {
    border: 1px solid #9A9A9A;
    height: 225px;
@@ -399,7 +399,7 @@
 .ifixit-guide .ifixit-line-2 { margin-left: 3em; }
 .ifixit-guide .ifixit-line-3 { margin-left: 4.5em; }
 
-.ifixit-guide .ifixit-stepLines .ifixit-bullet { 
+.ifixit-guide .ifixit-stepLines .ifixit-bullet {
    background-image: url("http://static.ifixit.net/static/images/guide/bullets.gif");
    background-repeat: no-repeat;
    left: -16px;
@@ -473,6 +473,9 @@
    height: 30px;
    margin: 0;
    color: #FFF;
+}
+
+.ifixit-guide-large #ifixit-footer {
 }
 
 .ifixit-guide-large #ifixit-parts-link {

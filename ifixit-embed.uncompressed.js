@@ -15,9 +15,10 @@ if (!document.iFixitGuideWidget) {
 
       contains: function(a, obj) {
          var i = a.length;
-         while (i--)
+         while (i--) {
             if (a[i] === obj)
                return true;
+         }
          return false;
       },
 
@@ -101,7 +102,7 @@ if (!document.iFixitGuideWidget) {
             right = document.createElement('div');
             right.className = "ifixit-arrowNavRight";
             var hover = function() {
-               right.className = right.className == "ifixit-arrowNavRight" ? "ifixit-arrowNavRightHover" : "ifixit-arrowNavRight"; 
+               right.className = right.className == "ifixit-arrowNavRight" ? "ifixit-arrowNavRightHover" : "ifixit-arrowNavRight";
             };
 
             nav.onmouseover = hover;
@@ -110,7 +111,9 @@ if (!document.iFixitGuideWidget) {
 
          nav.onclick = function() { document.iFixitGuideWidget.displayStep(data, 0); };
          nav.appendChild(right);
-         nav.appendChild(ntext);
+         if (!document.iFixitGuideWidget.options.large) {
+            nav.appendChild(ntext);
+         }
          nav.id = 'ifixit-navigation';
 
          var headerTxt = document.createElement('div');
@@ -174,8 +177,9 @@ if (!document.iFixitGuideWidget) {
          mainImg.setAttribute('id', 'ifixit-stepImage');
 
          // Preload all the big images...
+         var img;
          for (var i = 0; i < step['images'].length && !isNaN(i); i++) {
-            var img = new Image();
+            img = new Image();
             img.src = step['images'][i]['text'] + '.standard';
          }
 
@@ -188,11 +192,11 @@ if (!document.iFixitGuideWidget) {
                images.appendChild(mainImgA);
 
             // Because of funkiness in jQuery and mootools
-            } else if (imgid >= 3 || isNaN(imgid)) { 
+            } else if (imgid >= 3 || isNaN(imgid)) {
                break;
             }
 
-            var img = document.createElement('img');
+            img = document.createElement('img');
             img.setAttribute('src', step['images'][imgid]['text'] + '.' + thumbnailSize);
             img.className = 'ifixit-stepThumb';
             img.onmouseover = function(e) {
@@ -280,6 +284,7 @@ if (!document.iFixitGuideWidget) {
          var nav = document.createElement('div');
          var right;
          var left;
+         var hover;
 
          if (document.iFixitGuideWidget.options.large) {
             right = document.createElement('a');
@@ -301,8 +306,8 @@ if (!document.iFixitGuideWidget) {
                // right.onclick = function() { document.iFixitGuideWidget.display(data); };
             } else {
                right.onclick = function() { document.iFixitGuideWidget.displayStep(data, (stepid + 1)); };
-               var hover = function() {
-                  right.className = right.className == "ifixit-arrowNavRight" ? "ifixit-arrowNavRightHover" : "ifixit-arrowNavRight"; 
+               hover = function() {
+                  right.className = right.className == "ifixit-arrowNavRight" ? "ifixit-arrowNavRightHover" : "ifixit-arrowNavRight";
                };
 
                right.onmouseover = hover;
@@ -332,8 +337,8 @@ if (!document.iFixitGuideWidget) {
                left.onclick = function() { document.iFixitGuideWidget.display(data); };
             }
 
-            var hover = function() {
-               left.className = left.className == "ifixit-arrowNavLeft" ? "ifixit-arrowNavLeftHover" : "ifixit-arrowNavLeft"; 
+            hover = function() {
+               left.className = left.className == "ifixit-arrowNavLeft" ? "ifixit-arrowNavLeftHover" : "ifixit-arrowNavLeft";
             };
 
             left.onmouseover = hover;
@@ -413,16 +418,17 @@ if (!document.iFixitGuideWidget) {
          left.className = 'ifixit-parts';
 
          var ul = document.createElement('ul');
+         var li, a, img;
          for (var i = 0; i < data['guide']['tools'].length && !isNaN(i); i++) {
-            var li = document.createElement('li');
-            var a = document.createElement('a');
-            var img = document.createElement('img');
+            li = document.createElement('li');
+            a = document.createElement('a');
+            img = document.createElement('img');
 
             img.setAttribute('src', data['guide']['tools'][i]['thumbnail']);
 
             a.href = data['guide']['tools'][i]['url'];
             a.innerHTML = data['guide']['tools'][i]['text'];
-            
+
             // Not everything has a img, ignoring for now.
             //li.appendChild(img);
             li.appendChild(a);
@@ -434,7 +440,7 @@ if (!document.iFixitGuideWidget) {
          }
 
          if (ul.children.length == 0) {
-            var li = document.createElement('li');
+            li = document.createElement('li');
             li.innerHTML = 'None';
             ul.appendChild(li);
          }
@@ -449,9 +455,9 @@ if (!document.iFixitGuideWidget) {
          right.appendChild(h3);
          ul = document.createElement('ul');
          for (i = 0; i < data['guide']['parts'].length && !isNaN(i); i++) {
-            var li = document.createElement('li');
-            var a = document.createElement('a');
-            var img = document.createElement('img');
+            li = document.createElement('li');
+            a = document.createElement('a');
+            img = document.createElement('img');
 
             img.setAttribute('src', data['guide']['parts'][i]['thumbnail']);
             a.href = data['guide']['parts'][i]['url'];
@@ -467,7 +473,7 @@ if (!document.iFixitGuideWidget) {
          }
 
          if (ul.children.length == 0) {
-            var li = document.createElement('li');
+            li = document.createElement('li');
             li.innerHTML = 'None';
             ul.appendChild(li);
          }
@@ -495,12 +501,13 @@ document.iFixitGuideWidget.loaded = (function() {
 
    var scripts = document.getElementsByTagName("script");
 
+   var guideid, script, size;
    for (var i in scripts) {
       // Look for the ifixit include...
-      var script = scripts[i];
+      script = scripts[i];
       if (script.src && script.src.search(script_regex) > -1) {
-         var size = document.iFixitGuideWidget.get_param('size', script.src);
-         var guideid = document.iFixitGuideWidget.get_param('id', script.src);
+         size = document.iFixitGuideWidget.get_param('size', script.src);
+         guideid = document.iFixitGuideWidget.get_param('id', script.src);
          if (!document.iFixitGuideWidget.contains(document.iFixitGuideWidget.embeds, guideid)) {
             embeds.push({
                script: scripts[i],
@@ -515,9 +522,9 @@ document.iFixitGuideWidget.loaded = (function() {
 
    var head = document.getElementsByTagName("head")[0];
    for (var j in embeds) {
-      var guideid = embeds[j].guideid;
-      var script = embeds[j].script;
-      var size = embeds[j].size;
+      guideid = embeds[j].guideid;
+      script = embeds[j].script;
+      size = embeds[j].size;
 
       if (!guideid)
          return false;
@@ -543,7 +550,7 @@ document.iFixitGuideWidget.loaded = (function() {
       js.async = true;
       head.appendChild(js);
 
-      // Needs to be in this loop to be embedable via a js post page load. 
+      // Needs to be in this loop to be embedable via a js post page load.
       // Why? I don't know.
       if (!document.iFixitGuideWidget.loaded) {
          var link = document.createElement("link");
