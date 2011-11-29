@@ -1,26 +1,22 @@
-# The Official iFixit JavaScript Embed
+# The Official iFixit/Dozuki JavaScript Embed
 
-This is an embeddable JavaScript widget for iFixit guides, obtaining data from [the iFixit API](http://www.ifixit.com/api).
+This is the uncompressed javascript and JS that is used for all embedded guides
+and How-Tos on iFixit and Dozuki.
 
-APIs used:
+## APIs used
 
  * <http://www.ifixit.com/api/guide>
  
 ## Contributing
 
-We are a small group of programmers and we are always looking for suggestions on ways to improve our products. Feel free to post feature requests and bug reports on [iFixit Meta](http://meta.ifixit.com/) or send us pull-requests here on GitHub.
+To report bugs and submit feature-requests, use [Github
+issues](https://github.com/iFixit/Javascript_Embed/issues). Or fork the
+repository and issue a pull-request with your changes.
 
 ## Using
 
-The easiest way to use these files is by embedding them from our CDN. More info can be found on [our site](http://www.ifixit.com/api/doc/embed), but two examples are:
-
-### Embed the Kinect Teardown in your page
-
-> &lt;script type=&quot;text/javascript&quot; src=&quot;http://www.ifixit.com/static/embed/ifixit-embed.js?id=4066&quot;&gt;&lt;/script&gt;
-
-### Embed a banana pops recipe from Make: Projects in your page.
-
-> &lt;script type=&quot;text/javascript&quot; src=&quot;http://www.ifixit.com/static/embed/make-embed.js?id=404&quot;&gt;&lt;/script&gt;
+The easiest way to use these embeds is to visit the Guide or How-to you'd like
+to embed and click on the "Embed" link and copy the resulting html.
 
 ## Trademark Notes
 
