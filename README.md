@@ -5,7 +5,7 @@ and How-Tos on iFixit and Dozuki.
 
 ## APIs used
 
- * <http://www.ifixit.com/api/guide>
+ * <http://www.ifixit.com/api/0.1/doc/guide/id>
  
 ## Contributing
 
